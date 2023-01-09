@@ -28,13 +28,11 @@ export default function App() {
   }
 
   return (
-  
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={[StyleSheet.absoluteFill, styles.container]}>
       {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
       </BarCodeScanner>
-    
   );
 }
 
