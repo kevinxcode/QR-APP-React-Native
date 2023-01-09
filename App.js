@@ -1,12 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomeScreen from "./components/Home";
+import ScanScreen from "./components/Scanner";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator  
+      screenOptions={{
+        headerTintColor: 'white',
+        headerStyle: { backgroundColor: '#025ef2' },
+        headerLeft: null,
+        headerBackButtonMenuEnabled: {
+          onChangeText: (event) => setSearch(event.nativeEvent.text),
+        },
+      }}>
+        <Stack.Screen name="SCANNER APP" component={HomeScreen} 
+         options={{
+          title: 'SCAN - APP',
+        }} />
+
+        <Stack.Screen name="Scanner" component={ScanScreen}
+        options={{
+          title: 'SCANNER',
+          headerBackVisible: false,
+          headerShown: true
+        }} />
+
+    
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
