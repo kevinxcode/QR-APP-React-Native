@@ -21,14 +21,12 @@ export default function App() {
       }}>
         <Stack.Screen name="SCANNER APP" component={HomeScreen} 
          options={{
-          title: 'SCAN - APP',
+          title: 'QR DASHBOARD',
         }} />
 
         <Stack.Screen name="Scanner" component={ScanScreen}
         options={{
           title: 'SCANNER',
-          headerBackVisible: false,
-          headerShown: true
         }} />
 
     
