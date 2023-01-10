@@ -9,6 +9,9 @@ import { useRoute } from '@react-navigation/native';
 export default function ResultScreen({ navigation }) {
   const route = useRoute();
   const final_url = route.params.paramKey;
+  const url = `https://bop.citratubindo.com/app/training/trainingAttendance/${final_url}`;
+  
+  // alert(url);
     const Spinner = () => (
         <View style={styles.activityContainer}>
           <Text>Loading..</Text>
@@ -17,12 +20,12 @@ export default function ResultScreen({ navigation }) {
     );
   return (
     <View style={{height:"100%" , width:"100%",}}>
-       <Text>{final_url}</Text>
+       {/* <Text>{final_url}</Text> */}
         <WebView
         bounces={false}
         startInLoadingState={true}
         renderLoading={Spinner}
-      source={{ uri: final_url }}
+      source={{ url }}
     />
     
    
