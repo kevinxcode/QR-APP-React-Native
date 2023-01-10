@@ -27,7 +27,7 @@ export default function App() {
         }} />
 
 
-        <Stack.Screen name="SCANNER APP" component={HomeScreen} 
+        <Stack.Screen name="HOME" component={HomeScreen} 
          options={{
           title: 'QR DASHBOARD',
         }} />

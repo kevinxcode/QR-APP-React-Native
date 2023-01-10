@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Image, FlatList } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const isLogin = true;
@@ -9,6 +10,8 @@ export default function Login({ navigation }) {
     const [userName, setUserName] = useState('');
     const [passWord, setUpassWord] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isLogin, setisLogin] = useState(false);
+    const [loginArray, setData] = useState([]);
 
     const login = () => {
         setIsLoading(true);
@@ -24,16 +27,16 @@ export default function Login({ navigation }) {
         }),
         })
             .then((response) => response.json())
+            .then((json) => setData(json))
             .then((responseJson) => {
             if (responseJson == 'Gagal') {
                 // redirect to profile page
                 alert('Wrong Login Details');
                 // this.props.navigation.navigate('Profile');
             } else {
-                alert('Login Successfuly');
-                this.timeoutHandle = setTimeout(()=>{
-                    navigation.replace("SCANNER APP")
-               }, 800);
+                alert('Login Success');
+                setIsLoading(true);
+                navigation.replace("HOME")
                
             }
             setIsLoading(false);
@@ -56,6 +59,7 @@ export default function Login({ navigation }) {
           uri: 'https://reactnative.dev/img/tiny_logo.png',
         }}
       />
+      
            <Text>LOGIN</Text>
             <TextInput 
                 onChangeText={(userName) => setUserName(userName)} 
@@ -73,6 +77,14 @@ export default function Login({ navigation }) {
         ) : (
             <Button onPress={login}  title="SIGN IN" style={styles.button} />
         )}
+
+        {/* <FlatList
+            data={loginArray}
+            keyExtractor={({ id }) => id.toString()}
+            renderItem={({ item }) => 
+                <Text>{item.name} </Text>
+            }
+          /> */}
            
         </View>
     );
