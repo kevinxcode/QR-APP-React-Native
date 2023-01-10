@@ -1,25 +1,78 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
+
+const isLogin = true;
+
+
 export default function Login({ navigation }) {
     const [userName, setUserName] = useState('');
     const [passWord, setUpassWord] = useState('');
-    const onPressLearnMore = () => {
-        //For generating alert on buttton click
-        // alert(userName);
-        navigation.replace("SCANNER APP")
-    };
+    const [isLoading, setIsLoading] = useState(false);
+
+    const login = () => {
+        setIsLoading(true);
+        fetch('https://fadeshare.com/react/api//login', {
+        method: 'post',
+        header: {
+             Accept: 'application/json',
+             'Content-type': 'application/json',
+            },
+        body: JSON.stringify({
+            userName: userName,
+            passWord: passWord,
+        }),
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+            if (responseJson == 'Gagal') {
+                // redirect to profile page
+                alert('Wrong Login Details');
+                // this.props.navigation.navigate('Profile');
+            } else {
+                alert('Login Successfuly');
+                this.timeoutHandle = setTimeout(()=>{
+                    navigation.replace("SCANNER APP")
+               }, 800);
+               
+            }
+            setIsLoading(false);
+            })
+            .catch((error) => {
+                 console.error(error);
+            });
+        };
+    
+    // const onPressLearnMore = () => {
+    //     //For generating alert on buttton click
+    //     // alert(userName);
+    //     navigation.replace("SCANNER APP")
+    // };
     return (
         <View style={styles.container}>
-            <Text>LOGIN</Text>
+            {/* {isLogin ? (
+                navigation.replace("LOGIN")
+            ) : (
+                navigation.navigate("LOGIN")
+             )} */}
+           <Text>LOGIN</Text>
             <TextInput 
                 onChangeText={(userName) => setUserName(userName)} 
                 value={userName} 
                 placeholder={'User Name'} style={styles.input} />
 
-            <TextInput secureTextEntry={true} placeholder={'Password'} style={styles.input} />
+            <TextInput 
+                secureTextEntry={true}
+                onChangeText={(passWord) => setUpassWord(passWord)} 
+                value={passWord} 
+                placeholder={'Password'} style={styles.input} />
 
-            <Button onPress={onPressLearnMore} title="SIGN IN" style={styles.button} />
+        {isLoading ? (
+             <Button title="LOADING.." style={styles.button} />
+        ) : (
+            <Button onPress={login}  title="SIGN IN" style={styles.button} />
+        )}
+           
         </View>
     );
 }

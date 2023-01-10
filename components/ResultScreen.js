@@ -8,8 +8,8 @@ import { useRoute } from '@react-navigation/native';
 
 export default function ResultScreen({ navigation }) {
   const route = useRoute();
-  const final_url = route.params.paramKey;
-  const url = `https://bop.citratubindo.com/app/training/trainingAttendance/${final_url}`;
+  const qrToken = route.params.paramKey;
+  // const url = `https://bop.citratubindo.com/app/training/trainingAttendance/${final_url}`;
   
   // alert(url);
     const Spinner = () => (
@@ -25,7 +25,7 @@ export default function ResultScreen({ navigation }) {
         bounces={false}
         startInLoadingState={true}
         renderLoading={Spinner}
-      source={{ url }}
+      source={{ uri: `https://silanang.com/app/pdf/pdf_export_admin/${qrToken}` }}
     />
     
    

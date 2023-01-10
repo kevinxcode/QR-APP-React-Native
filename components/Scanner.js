@@ -21,7 +21,7 @@ export default function App({ navigation }) {
     // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     console.log(data);
     navigation.navigate("RESULT", {
-      paramKey: data,
+    paramKey: data,
     })
   };
 
