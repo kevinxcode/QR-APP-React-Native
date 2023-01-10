@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
 
 
 const isLogin = true;
@@ -50,11 +50,12 @@ export default function Login({ navigation }) {
     // };
     return (
         <View style={styles.container}>
-            {/* {isLogin ? (
-                navigation.replace("LOGIN")
-            ) : (
-                navigation.navigate("LOGIN")
-             )} */}
+            <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: 'https://reactnative.dev/img/tiny_logo.png',
+        }}
+      />
            <Text>LOGIN</Text>
             <TextInput 
                 onChangeText={(userName) => setUserName(userName)} 
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "center",
+        // justifyContent: "center",
         padding: 25
     },
     input: {
@@ -97,5 +98,11 @@ const styles = StyleSheet.create({
         width: '100%',
         margin: 8,
         padding: 10,
-    }
+    },
+    tinyLogo: {
+        width: 50,
+        height: 50,
+        alignItems: "center",
+        margin: 20,
+     },
 })
