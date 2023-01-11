@@ -25,7 +25,9 @@ export default function ResultScreen({ navigation }) {
         bounces={false}
         startInLoadingState={true}
         renderLoading={Spinner}
-      source={{ uri: `https://silanang.com/app/pdf/pdf_export_admin/${qrToken}` }}
+        source={{ uri: `https://silanang.com/app/pdf/pdf_export_admin/${qrToken}` }}
+        sharedCookiesEnabled={true}
+        thirdPartyCookiesEnabled={true}
     />
     
    
