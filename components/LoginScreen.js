@@ -10,7 +10,7 @@ export default function Login({ navigation }) {
     const [userName, setUserName] = useState('');
     const [passWord, setUpassWord] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [loginArray, setData] = useState([]);
+    // const [loginArray, setData] = useState([]);
 
     const login = () => {
         setIsLoading(true);
@@ -28,13 +28,12 @@ export default function Login({ navigation }) {
             .then((response) => response.json())
             .then((responseJson) => {
             if (responseJson == 'Gagal') {
-                // redirect to profile page
                 alert('Wrong Login Details');
-                // this.props.navigation.navigate('Profile');
             } else {
-                alert(responseJson);
+                // alert(JSON.stringify(responseJson));
+                const loginArray = JSON.stringify(responseJson)
+                console.log(loginArray);
                 navigation.replace("HOME");
-               
             }
             setIsLoading(false);
             })
